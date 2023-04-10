@@ -3,6 +3,7 @@ import { Noto_Sans_KR } from 'next/font/google'
 import ReactQueryProvider from "./ReactQueryProvider";
 import Header from '@/components/view/Header';
 import FloatingBtn from '@/components/ui/FloatingBtn';
+import AuthContext from '@/context/AuthContext';
 
 const notoSansKr = Noto_Sans_KR({
   subsets: ["latin"], 
@@ -22,9 +23,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={notoSansKr.className}>
       <body>
+        <AuthContext>
         <Header />
       <ReactQueryProvider>{children}</ReactQueryProvider>
       <FloatingBtn /> 
+      </AuthContext>
         </body>
     </html>
   )
