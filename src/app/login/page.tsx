@@ -1,7 +1,7 @@
 import LoginForm from "@/components/view/LoginForm";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { getServerSession } from "next-auth";
-import { getProviders } from "next-auth/react";
+import { getProviders, getSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 
 type Props ={
@@ -11,6 +11,11 @@ type Props ={
 }
 
 export default async function Login({searchParams: {callbackUrl}}: Props) {
+    const session = await getSession()
+    if (session) {
+        // Signed in
+        console.log("Session", JSON.stringify(session, null, 2))
+      } 
     // const session = await getServerSession(authOptions);
 
     // if(session) {
