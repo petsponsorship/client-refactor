@@ -1,34 +1,32 @@
-import './globals.css'
-import { Noto_Sans_KR } from 'next/font/google'
+import "./globals.css";
+import { Noto_Sans_KR } from "next/font/google";
 import ReactQueryProvider from "./ReactQueryProvider";
-import Header from '@/components/view/Header';
-import FloatingBtn from '@/components/ui/FloatingBtn';
-import AuthContext from '@/context/AuthContext';
+import Header from "@/components/view/Header";
+import FloatingBtn from "@/components/ui/FloatingBtn";
+import AuthContext from "@/context/AuthContext";
+import AuthroizationHeader from "@/context/AuthroizationHeader";
 
 const notoSansKr = Noto_Sans_KR({
-  subsets: ["latin"], 
+  subsets: ["latin"],
   weight: ["100", "400", "700", "900"], // 가변 폰트가 아닌 경우, 사용할 fontWeight 배열
 });
 
 export const metadata = {
-  title: '댕도네냥',
-  description: '마음을 전해보세요',
-}
+  title: "댕도네냥",
+  description: "마음을 전해보세요",
+};
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={notoSansKr.className}>
       <body>
         <AuthContext>
-        <Header />
-      <ReactQueryProvider>{children}</ReactQueryProvider>
-      <FloatingBtn /> 
-      </AuthContext>
-        </body>
+          <AuthroizationHeader />
+          <Header />
+          <ReactQueryProvider>{children}</ReactQueryProvider>
+          <FloatingBtn />
+        </AuthContext>
+      </body>
     </html>
-  )
+  );
 }
