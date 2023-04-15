@@ -21,7 +21,6 @@ export  const authOptions: NextAuthOptions ={
                 });
                 const user = await res.json();
 
-                const accessToken = user.accessToken;
                 if(res.ok && user) {
                     return user
                 }
@@ -32,12 +31,15 @@ export  const authOptions: NextAuthOptions ={
         async jwt({user, token, account}){
             if(user) {
                 token.Authorization = user?.accessToken
+                token.refreshToken = user.refreshToken
             }
-            return token
+            return token;
         },
         async session({token, session}){
             session.Authorization = token.Authorization
-            return session
+            session.RefreshToken = token.refreshToken
+            return session;
+
         }
     },
     pages: {
