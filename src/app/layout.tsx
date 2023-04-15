@@ -21,10 +21,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={notoSansKr.className}>
       <body>
         <AuthContext>
-          <AuthroizationHeader />
-          <Header />
-          <ReactQueryProvider>{children}</ReactQueryProvider>
-          <FloatingBtn />
+          <AuthroizationHeader>
+            <Header />
+            <ReactQueryProvider>{children}</ReactQueryProvider>
+            <FloatingBtn />
+          </AuthroizationHeader>
         </AuthContext>
       </body>
     </html>

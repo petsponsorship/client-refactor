@@ -1,3 +1,5 @@
+'use client'
+import { getCookie } from "@/util/cookies";
 import axios from "axios"
 import { getSession, useSession } from "next-auth/react"
 
@@ -10,16 +12,16 @@ export const instance = axios.create({
     }
 })
 
-    instance.interceptors.request.use(async(request)=> {
-        const session = await useSession
+    instance.interceptors.request.use((config)=> {
+        if(!config.headers) return config;
+        const accessToken = getCookie("Authorization");
+        const refreshToken = getCookie("RefreshToken");
 
-        if(session) {
-            request.headers.common = {
-                Authorization: `${session.user.Authorization}`,
-                RefreshToken: `${session.user.refreshToken}`
-            }
+        if(accessToken && refreshToken && config.headers) {
+            config.headers["Authorization"] = `${accessToken}`;
+            config.headers["RefreshToken"] = `${refreshToken}`
         }
-        return request;
+        return config;
     })
     
     instance.interceptors.response.use((response)=> {

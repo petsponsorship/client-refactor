@@ -38,7 +38,6 @@ export  const authOptions: NextAuthOptions ={
         async session({token, session}){
             session.Authorization = token.Authorization
             session.RefreshToken = token.refreshToken
-                        console.log(session)
             return session;
 
         }
