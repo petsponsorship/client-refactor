@@ -1,0 +1,20 @@
+export type Post = {
+    name: string;
+    adopt: number;
+    age: number;
+    amound: number;
+    createdAt: string;
+    etcDetail: null | string;
+    expired: 0 | 1;
+    expiredAt: string;
+    expiredDesc: null | string;
+    id: number;
+    isExtend: 0 | 1;
+    neutered: number;
+    purpose: string;
+    sex: 0 | 1;
+    species: "강아지" | "고양이" | "기타";
+    sponsor: number;
+    targetAmount: number;
+    thumbnail: string;
+  };

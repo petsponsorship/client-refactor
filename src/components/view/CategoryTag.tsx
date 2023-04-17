@@ -25,7 +25,6 @@ export default function CategoryTag() {
 
   const onSelect = (categoryname: string) => {
     const current = new URLSearchParams();
-
     current.set("selected", categoryname);
 
     const search = current.toString();
