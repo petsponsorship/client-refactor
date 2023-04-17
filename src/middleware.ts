@@ -2,6 +2,8 @@ import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
 
 
+
+
 const FALLBACK_URL =""
 const withAuth = async (req: NextRequest, token: boolean) =>{
 
@@ -37,6 +39,16 @@ const withAuthList = ["/mypage", "/write"]
 const withOutAuthList = ["/login", "/signup"]
 
 export default async function middleware(req: NextRequest) {
+
+    //미들웨어 쿠키
+    let cookie = req.cookies.get("Authroization")?.value || ""
+
+
+    //setting Headers
+    const requestHeaders = new Headers(req.headers);
+    requestHeaders.set("Authroization", cookie);
+
+
     const token = await getToken({ req });
     const {searchParams} = req.nextUrl;
     const callbackUrl = searchParams.get("callbackUrl");
