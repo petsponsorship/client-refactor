@@ -28,12 +28,6 @@ export  const authOptions: NextAuthOptions ={
                         const user = await res.json();
                         return user;
                     }
-
-    
-                    // if(res.ok && user) {
-                    //     return user
-                    // }} catch (e){
-                    //     throw new Error("Error")
             }
         })
     ],
@@ -55,6 +49,7 @@ export  const authOptions: NextAuthOptions ={
     },
     pages: {
         signIn: '/login',
+        signOut: '/logout',
         error: '/auth/error',
         newUser: '/auth/new-user'
     }
