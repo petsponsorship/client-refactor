@@ -1,4 +1,3 @@
-import { instance } from "@/api/apiclient";
 import Banner from "@/components/ui/Banner";
 import CategoryTag from "@/components/view/CategoryTag";
 import PostGrid from "@/components/view/PostGrid";
