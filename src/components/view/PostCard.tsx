@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { Post } from "./PostGrid";
 import Image from "next/image";
 import ProgressBar from "../ui/ProgressBar";
+import { Post } from "@/model/post";
 
 type Props = {
   post: Post;
