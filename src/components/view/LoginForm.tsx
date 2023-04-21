@@ -25,15 +25,16 @@ export default function LoginForm() {
       email,
       password,
       redirect: false,
-    })
-      // .then(() => router.push("/"));
-      .then((res) => {
-        if (res?.ok) {
-          return router.push("/");
-        } else {
-          alert(`${res?.error}! 존재하지 않는 회원이거나 아이디와 비밀번호가 일치하지 않습니다.`);
-        }
-      });
+    }).then((res) => {
+      if (res?.ok) {
+        const url = res.url ?? "/";
+        const urlParams = new URL(url).searchParams;
+        const name = urlParams.get("callbackUrl");
+        return router.push(name ?? "/");
+      } else {
+        alert(`${res?.error}! 존재하지 않는 회원이거나 아이디와 비밀번호가 일치하지 않습니다.`);
+      }
+    });
   };
 
   return (

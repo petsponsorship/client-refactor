@@ -1,4 +1,3 @@
-import axios from "axios";
 import { NextApiRequest } from "next";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";

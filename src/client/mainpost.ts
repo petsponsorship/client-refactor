@@ -6,3 +6,8 @@ export const fetchCategoryData = async (species: string) => {
     );
     return response.data
 }
+
+export const fetchMainData = async () => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts?species=`)
+  return res;
+}
