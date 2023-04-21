@@ -1,3 +1,4 @@
+import { log } from "console";
 import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -5,8 +6,9 @@ import { NextRequest, NextResponse } from "next/server";
 
 
 const FALLBACK_URL =""
+//로그인하지 않은 사용자가 withAuthList(["/mypage", "/write"]) 중 한 페이지에 접근하려고 하면,
+// req객체 중, nexturl 안에 pathname을 쿼리스트링으로 붙여서 로그인 페이지로 리다이렉트 시켜줌 
 const withAuth = async (req: NextRequest, token: boolean) =>{
-
     const url = req.nextUrl.clone();
     const {pathname} = req.nextUrl;
 
@@ -21,13 +23,13 @@ const withAuth = async (req: NextRequest, token: boolean) =>{
     }
 }
 
-const withOutAuth = async (req:NextRequest, token: boolean, to: string | null) => {
+const withOutAuth = async (req:NextRequest, token: boolean, to: string) => {
 
     const url = req.nextUrl.clone();
     const {pathname} = req.nextUrl;
 
     if(token) {
-        url.pathname = to ?? FALLBACK_URL;
+        url.pathname= to ?? to;
         url.search = "";
 
         return NextResponse.redirect(url)
@@ -35,8 +37,8 @@ const withOutAuth = async (req:NextRequest, token: boolean, to: string | null) =
 }
 
 
-const withAuthList = ["/mypage", "/write"]
-const withOutAuthList = ["/login", "/signup"]
+const withAuthList =["/mypage", "/write"] //로그인했을 때 진입가능
+const withOutAuthList =  ["/login", "/signup"] //로그인 하면 진입 불가능 
 
 export default async function middleware(req: NextRequest) {
 
@@ -49,16 +51,17 @@ export default async function middleware(req: NextRequest) {
     requestHeaders.set("Authroization", cookie);
 
 
-    const token = await getToken({ req });
+
+
     const {searchParams} = req.nextUrl;
-    const callbackUrl = searchParams.get("callbackUrl");
+    const callbackUrl = searchParams.get("callbackUrl")
     const pathname = req.nextUrl.pathname
 
     const isWithAuth = withAuthList.includes(pathname);
     const isWithOutAuth = withOutAuthList.includes(pathname);
 
-    if(isWithAuth) return withAuth(req, !!token)
-    if(isWithOutAuth) return withOutAuth(req, !!token, callbackUrl)
+    if(isWithAuth) return withAuth(req, !!cookie)
+    if(isWithOutAuth) return withOutAuth(req, !!cookie, callbackUrl??"")
 
   }
   

@@ -1,6 +1,6 @@
 "use client";
 import { signOut, useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 
 export default function Signout() {
   const session = useSession();
@@ -12,7 +12,7 @@ export default function Signout() {
       <div className="flex gap-8 mt-16">
         <button
           className="bg-red-200 w-16 rounded-md p-1 text-sm"
-          onClick={() => signOut({ redirect: false })}
+          onClick={() => signOut({ redirect: false }).then(() => router.push("/"))}
         >
           확인
         </button>
