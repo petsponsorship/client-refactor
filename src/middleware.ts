@@ -13,7 +13,7 @@ const withAuth = async (req: NextRequest, token: boolean) =>{
     const {pathname} = req.nextUrl;
 
     if(!token) {
-        //토큰값이 falsy한 사용자가 withAuth페이지에 진입하려하면,
+        //토큰값이 falsy한 사용자가 withAuth페이지에 진입하려하면,(로그인되지 않은 사용자가)
         //미들웨어에서 req객체 중에 NextUrl 안에 담긴 pathname을 쿼리스트링을 붙여서 로그인페이지로 리다이렉트 시킴
         url.pathname = '/login';
         //로그인하면 이전페이지로 이동하기 위해서 쿼리스트링사용하여 붙여줌. 

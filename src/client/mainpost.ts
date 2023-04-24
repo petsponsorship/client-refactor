@@ -8,6 +8,6 @@ export const fetchCategoryData = async (species: string) => {
 }
 
 export const fetchMainData = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts?species=`)
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts?species`)
   return res;
 }

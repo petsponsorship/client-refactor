@@ -30,7 +30,7 @@ export default function LoginForm() {
         const url = res.url ?? "/";
         const urlParams = new URL(url).searchParams;
         const name = urlParams.get("callbackUrl");
-        return router.push(name ?? "/");
+        return router.push(name ? name : "/");
       } else {
         alert(`${res?.error}! 존재하지 않는 회원이거나 아이디와 비밀번호가 일치하지 않습니다.`);
       }
