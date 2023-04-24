@@ -1,7 +1,9 @@
 import { fetchCategoryData, fetchMainData } from "@/client/mainpost";
 import Banner from "@/components/ui/Banner";
 import CategoryTag from "@/components/view/CategoryTag";
-import axios from "axios";
+
+
+export default function Home() {
 
 export default async function Home() {
   //전체데이터는 서버에서 먼저 불러오기.
@@ -10,7 +12,6 @@ export default async function Home() {
     <main>
       <Banner />
       <CategoryTag />
-      {/* <PostGrid /> */}
     </main>
   );
 }
