@@ -2,7 +2,8 @@
 import { useEffect, useState } from "react";
 import PostGrid from "./PostGrid";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { fetchCategoryData } from "@/client/mainpost";
+import { fetchCategoryData, fetchMainData } from "@/client/mainpost";
+import { useSession } from "next-auth/react";
 
 const categories = [
   { name: "all", text: "전체" },

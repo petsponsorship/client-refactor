@@ -4,6 +4,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 
 
 export  const authOptions: NextAuthOptions ={
+    secret: process.env.NEXTAUTH_SECRET,
     providers: [
         CredentialsProvider({
             id: "user-credentials",
@@ -42,7 +43,6 @@ export  const authOptions: NextAuthOptions ={
             session.Authorization = token.Authorization
             session.RefreshToken = token.refreshToken
             return session;
-
         },
 
     },
