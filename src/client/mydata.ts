@@ -11,3 +11,29 @@ export const myNumData =async(accessToken: string)=>{
 
     return data.json();
 }
+
+export const getMySupportList = async (accessToken: string) => {
+  const supportlist = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/support`, {
+    headers: {
+        withCredentials: true,
+      "Content-Type": "application/json",
+      Authorization: `${accessToken}`,
+    }
+  })
+  return supportlist.json();
+}
+
+export const getMylikeApi = async (accessToken: string) => {
+  const likelist = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/like`, {
+    headers: {
+      withCredentials: true,
+    "Content-Type": "application/json",
+    Authorization: `${accessToken}`,
+  }
+  })
+  return likelist.json()
+}
+
+// export const getMyWriteList = async () => {
+//   const writelist = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts?user=${userId}`)
+// }
