@@ -13,5 +13,5 @@ export async function GET() {
     if(!accessToken){
         return new Response("Authentication Error!!!!!!!!!!!", {status: 401})
     }
-    return await myNumData(accessToken, refreshToken).then(res=> NextResponse.json(res))
+    return await myNumData(accessToken).then(res=> NextResponse.json(res))
 }
