@@ -34,6 +34,13 @@ export const getMylikeApi = async (accessToken: string) => {
   return likelist.json()
 }
 
-// export const getMyWriteList = async () => {
-//   const writelist = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts?user=${userId}`)
-// }
+export const getMyWriteList = async (userId: number, accessToken: string) => {
+  const writelist = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts?user=${userId}`, {
+    headers: {
+      withCredentials: true,
+    "Content-Type": "application/json",
+    Authorization: `${accessToken}`,
+  }
+  })
+  return writelist.json();
+}

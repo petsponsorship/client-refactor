@@ -17,4 +17,5 @@ export type Post = {
     sponsor: number;
     targetAmount: number;
     thumbnail: string;
+    amount: number;
   };
