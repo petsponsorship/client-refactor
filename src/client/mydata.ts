@@ -44,3 +44,32 @@ export const getMyWriteList = async (userId: number, accessToken: string) => {
   })
   return writelist.json();
 }
+
+export const putPostEnd = async (id: number, accessToken: string) => {
+  const postexpire = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts/end/${id}`, {
+    method: "PUT",
+    headers: {
+      withCredentials: true,
+    "Content-Type": "application/json",
+    Authorization: `${accessToken}`,
+  }
+  })
+
+  return postexpire.json()
+}
+
+export const extendSponsor = async (id:number, accessToken:string) => {
+  const extend = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/support/extend`, {
+    method: "POST",
+    headers: {
+      withCredentials: true,
+    "Content-Type": "application/json",
+    Authorization: `${accessToken}`,
+  },
+  body : JSON.stringify({
+    postId: `${id}`
+  }) 
+  }, )
+
+  return extend.json()
+}

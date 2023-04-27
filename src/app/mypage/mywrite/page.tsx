@@ -12,5 +12,5 @@ export default async function MyWrite() {
 
   const data = await getMyWriteList(userId, accessToken);
 
-  return <WritedPostGrid posts={data} />;
+  return <WritedPostGrid posts={data} accessToken={accessToken} />;
 }

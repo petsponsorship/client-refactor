@@ -3,13 +3,35 @@ import { Post } from "@/model/post";
 import Link from "next/link";
 import ProgressBar from "../ui/ProgressBar";
 import Image from "next/image";
+import { extendSponsor, putPostEnd } from "@/client/mydata";
 
 type Props = {
   post: Post;
+  accessToken: string;
 };
 
-export default function WritedCard({ post }: Props) {
+export default function WritedCard({ post, accessToken }: Props) {
   const { thumbnail, name, age, sex, sponsor, targetAmount, amount, id, expired } = post;
+
+  const sponsorEnd = async (id: number) => {
+    if (confirm("후원을 종료하시겠습니까?")) {
+      return await putPostEnd(id, accessToken);
+    } else {
+      return;
+    }
+  };
+
+  const sponExtend = async (id: number) => {
+    if (confirm("후원기간을 2주 연장하시겠습니까?")) {
+      return extendSponsor(id, accessToken).then((res) =>
+        res.message
+          ? alert(res.message)
+          : alert("후원기간을 연장을 완료하였습니다. 연장은 1회로 제한됩니다.")
+      );
+    } else {
+      return;
+    }
+  };
 
   return (
     <Link
@@ -38,13 +60,19 @@ export default function WritedCard({ post }: Props) {
         <div className="w-full gap-4 flex mt-8">
           <button
             className="w-1/2 h-10 bg-gray-300 rounded-md "
-            //  onClick={()=>sponsorEnd(id)}
+            onClick={(e) => {
+              e.preventDefault();
+              return sponsorEnd(id);
+            }}
           >
             후원 종료하기
           </button>
           <button
             className="w-1/2 h-10 bg-red-200 rounded-md "
-            //  onClick={()=>extendSpon(id)}
+            onClick={async (e) => {
+              e.preventDefault();
+              return sponExtend(id);
+            }}
           >
             후원 연장하기
           </button>
