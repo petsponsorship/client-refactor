@@ -27,6 +27,7 @@ export const instance = axios.create({
         const refreshToken = getToken().then(res=>res.refreshToken)
 
         if(accessToken && refreshToken && config.headers) {
+            console.log("토큰있음")
             config.headers["Authorization"] = `${accessToken}`;
             config.headers["RefreshToken"] = `${refreshToken}`
         }

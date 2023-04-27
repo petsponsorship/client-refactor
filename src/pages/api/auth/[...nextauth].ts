@@ -36,12 +36,14 @@ export  const authOptions: NextAuthOptions ={
             if(user) {
                 token.Authorization = user?.accessToken
                 token.refreshToken = user.refreshToken
+                token.userId = user.userId;
             }
             return token;
         },
         async session({token, session}){
             session.Authorization = token.Authorization
             session.RefreshToken = token.refreshToken
+            session.userId = token.userId
             return session;
         },
 
